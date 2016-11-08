@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+			<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+			<link rel="stylesheet" href="css/css.css">
+		</head>
+        <script src="javascript/jquery-3.1.0.min.js"></script>  
+        <script type="text/javascript">
+            $(document).ready(
+				function() {
+					$("#barraConteudo1").click(MostrarEsconder1);
+					$("#barraConteudo1").click(alteraImagem('botaoDesempenho1'));
+                }
+			);
+            function MostrarEsconder1(){
+                $(".barraConteudoEspecificacoes1").toggle();
+            }
+			
+			function alteraImagem(x) {
+				var img = document.getElementById(x).src;
+				var src = img.substr(img.src.lastIndexOf('/') + 1, img.src.length);
+
+				if (src == 'botaoDesempenhoDesativado.png') {
+					document.getElementById(x).src = 'css/imagens/botaoDesempenhoAtivado.png'; //
+				} else { 
+					document.getElementById(x).src = 'css/imagens/botaoDesempenhoDesativado.png';
+				} 
+				window.alert('' + x ' .');
+			}
+		</script>
+		<body>
+			<div id="barraConteudo1">
+				oioioioi
+				<img src="css/imagens/botaoDesempenhoAtivado.png" class="botaoDesempenho" id="botaoDesempenho1">
+			</div>
+			<div class="barraConteudoEspecificacoes1">
+				lalalala
+			</div>
+		</body>
+	</html>

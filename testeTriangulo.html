@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+			<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+			<link rel="stylesheet" href="css/css.css">
+		</head>
+		<script type="text/javascript">
+			function giraSeta(){
+				//document.getElementById('setaBaixo').style.border = "transparent transparent #7f7f7f transparent";
+				/*var x = 5;
+				if(x % 2 == 1){
+					document.getElementById('setaBaixo').style.float = "right";
+				}
+				if(x % 2 == 0){
+					document.getElementById('setaBaixo').style.float = "left";
+				}
+				x++;*/
+				for (var i = 0; i < 10; i++){
+					if(i % 2 == 1){
+						document.getElementById('setaBaixo').style.float = "right";
+					}
+					if(i % 2 == 0){
+						document.getElementById('setaBaixo').style.float = "left";
+					}
+				}
+				window.alert("" + i);
+			}
+		</script>
+		<style>
+			#setaBaixo{
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 100px 65px 0 65px;
+				border-color: #7f7f7f transparent transparent transparent;
+				
+			}
+		</style>
+		<body>
+			<a onclick="giraSeta()"><div id="setaBaixo"></div></a>
+		</body>
+	</html>

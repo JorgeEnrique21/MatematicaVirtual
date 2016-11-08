@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+			<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+			<link rel="stylesheet" href="css/css.css">
+		</head>
+        <script src="javascript/jquery-3.1.0.min.js"></script>  
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#barraConteudo1").click(MostrarEsconder1);
+                });
+            function MostrarEsconder1(){
+                $(".barraConteudoEspecificacoes1").toggle();
+            }
+			$(document).ready(function() {
+                $("#barraConteudo2").click(MostrarEsconder2);
+                });
+            function MostrarEsconder2(){
+                $(".barraConteudoEspecificacoes2").toggle();
+            }
+			$(document).ready(function() {
+                $("#barraConteudo3").click(MostrarEsconder3);
+                });
+            function MostrarEsconder3(){
+                $(".barraConteudoEspecificacoes3").toggle();
+            }
+        </script>
+		<script>
+			function alteraImagem(img) {
+				var src = img.src.substr(img.src.lastIndexOf('/') + 1, img.src.length);
+
+
+				if (src == 'botaoDesempenhoDesativado.png') {
+					img.src = 'css/imagens/botaoDesempenhoAtivado.png'; //
+				} else { 
+					img.src = 'css/imagens/botaoDesempenhoDesativado.png';
+				}   
+			}
+		</script>
+		<body>
+
+			<div id="containerAll">
+
+			<div class="container-fluid">
+				<div class="row" id="containerConteudo">
+					<!-- Sidebar -->
+					<div class="col-md-2" id="containerSidebar"> 
+						<div id="sidebar">
+							<a href="index.html" id="home">
+								<div id="containerIcone">
+									MATEMÁTICA VIRTUAL
+									<div id="logo"></div>
+								</div>
+							</a>
+							<ul id="listaSidebar">
+								<li class="dropdown">
+									<a href="#">Turmas</a>
+								<li>
+									<a href="desempenho.html">Desempenho</a>
+								</li>
+								<li>
+									<a href="#">Conquistas</a>
+								</li>
+							</ul>
+						</div>					
+					</div>
+					<!-- Área de disposição dos cards da página -->
+					<div class="col-md-10" id="containerDesempenho"> 
+						<div class="container-fluid">
+							<!-- Card de informações da conta -->
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-md-5" id="desempenhoTitle">
+												<h1>Desempenho</h1>	
+											</div>
+											<div class="col-md-7"></div>
+										</div>
+										<div class="row" id="barraConteudo1" onclick="alteraImagem(botaoDesempenho1)">
+											<div class="col-md-11">
+												Conteúdo 1
+											</div>
+											<div class="col-md-1">
+												<a href="#">
+													<img src="css/imagens/botaoDesempenhoAtivado.png" class="botaoDesempenho" id="botaoDesempenho1">
+												</a>
+											</div>
+										</div>
+										<div class="barraConteudoEspecificacoes1">
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 1</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 4</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 4</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 2</div>
+											</div>
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 2</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 3</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 7</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 0</div>
+											</div>
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 3</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 8</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 1</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 1</div>
+											</div>
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 4</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 10</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 0</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 0</div>
+											</div>
+											<div class="row" id="barraConteudoResultados">
+												<div class="col-md-1"></div>
+												<div class="col-md-3" id="barraConteudoResultadosPerf">62,5%</div>
+												<div class="col-md-4" id="barraConteudoResultadosDica">30%</div>
+												<div class="col-md-3" id="barraConteudoResultadosErros">7,5%</div>
+												<div class="col-md-1"></div>
+											</div>
+											<div class="row" id="barraConteudoComentarios">
+												<div class="col-md-2"></div>
+												<div class="col-md-10">
+												<h2>Parabéns! Você tem um domínio da matéria</h2>
+												<h3>Continue praticando em casa para manter o conteúdo fresco em sua cabeça</h3></div>
+												<div class="col-md-2"></div>
+											</div>
+										</div>
+										<div class="row" id="barraConteudo2">
+											<div class="col-md-11">
+												Conteúdo 2
+											</div>
+											<div class="col-md-1">
+												<a href="#">
+													<img src="css/imagens/botaoDesempenhoDesativado.png" class="botaoDesempenho" id="botaoDesempenho2"  onclick="alteraImagem(this)">
+												</a>
+											</div>
+										</div>
+										<div class="barraConteudoEspecificacoes2">
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 1</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 4</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 4</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 2</div>
+											</div>
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 2</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 3</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 7</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 0</div>
+											</div>
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 3</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 8</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 1</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 1</div>
+											</div>
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 4</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 10</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 0</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 0</div>
+											</div>
+											<div class="row" id="barraConteudoResultados">
+												<div class="col-md-1"></div>
+												<div class="col-md-3" id="barraConteudoResultadosPerf">62,5%</div>
+												<div class="col-md-4" id="barraConteudoResultadosDica">30%</div>
+												<div class="col-md-3" id="barraConteudoResultadosErros">7,5%</div>
+												<div class="col-md-1"></div>
+											</div>
+											<div class="row" id="barraConteudoComentarios">
+												<div class="col-md-2"></div>
+												<div class="col-md-10">
+												<h2>Parabéns! Você tem um domínio da matéria</h2>
+												<h3>Continue praticando em casa para manter o conteúdo fresco em sua cabeça</h3></div>
+												<div class="col-md-2"></div>
+											</div>
+										</div>
+										<div class="row" id="barraConteudo3">
+											<div class="col-md-11">
+												Conteúdo 3
+											</div>
+											<div class="col-md-1">
+												<a href="#">
+													<img src="css/imagens/botaoDesempenhoAtivado.png" class="botaoDesempenho" id="botaoDesempenho3"  onclick="alteraImagem(this)">
+												</a>
+											</div>
+										</div>
+										<div class="barraConteudoEspecificacoes3">
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 1</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 4</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 4</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 2</div>
+											</div>
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 2</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 3</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 7</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 0</div>
+											</div>
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 3</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 8</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 1</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 1</div>
+											</div>
+											<div class="row" id="barraConteudoAtividade">
+												<div class="col-md-3" id="barraConteudoAtividadeEspec">Atividade 4</div>
+												<div class="col-md-3" id="barraConteudoAtividadePerf">Acertos perfeitos 10</div>
+												<div class="col-md-3" id="barraConteudoAtividadeDica">Acertos com dicas 0</div>
+												<div class="col-md-3" id="barraConteudoAtividadeErros">Erros 0</div>
+											</div>
+											<div class="row" id="barraConteudoResultados">
+												<div class="col-md-1"></div>
+												<div class="col-md-3" id="barraConteudoResultadosPerf">62,5%</div>
+												<div class="col-md-4" id="barraConteudoResultadosDica">30%</div>
+												<div class="col-md-3" id="barraConteudoResultadosErros">7,5%</div>
+												<div class="col-md-1"></div>
+											</div>
+											<div class="row" id="barraConteudoComentarios">
+												<div class="col-md-2"></div>
+												<div class="col-md-10">
+												<h2>Parabéns! Você tem um domínio da matéria</h2>
+												<h3>Continue praticando em casa para manter o conteúdo fresco em sua cabeça</h3></div>
+												<div class="col-md-2"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-1"></div>
+							</div>
+							
+							<!-- Fim das barras de desemepenho -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+			</div>
+			
+		</body>
+	</html>

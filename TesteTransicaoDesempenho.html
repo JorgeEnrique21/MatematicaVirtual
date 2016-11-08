@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>Meu menu</title>
+        <style type="text/css"><!--
+            .menucontainer {
+                background: #eee
+            }
+            ul.menu, ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: block
+            }
+            ul.menu a {
+                text-decoration: none;
+                color: inherit
+            }
+            ul.menu li {
+                display: block;
+                float: left;
+                position: relative;
+                padding: 10px
+            }
+            ul.menu li:hover {
+                background: #ddd
+            }
+            ul.menu li li {
+                float: none;
+                padding: 0
+            }
+            ul.menu li li a {
+                padding: 10px;
+                display: block
+            }
+            ul.menu li .verticalhider {
+                position: absolute;
+                top: 90%;
+                left: 0;
+                overflow: hidden
+            }
+            ul.menu li ul {
+                display: none;
+                background: #f3f3f3;
+                width: 200px;
+                padding: 5px;
+                border: 1px dotted #555;
+                position: relative
+            }
+            ul.menu li:hover ul {
+                display: block
+            }
+            .clearfix {
+                clear: both
+            }
+        //--></style>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript"><!--
+            (function($){
+                $(function(){
+                    $('.menu li > .verticalhider > ul').each(function(){
+                        var u = $(this);
+                        function getHeight(){
+                            return u.height() + parseInt(u.css('paddingTop')) + parseInt(u.css('paddingBottom')) + parseInt(u.css('borderTopWidth')) + parseInt(u.css('borderBottomWidth'))
+                        }
+                        u.css({display: 'block', marginTop: -getHeight()}).parent().parent().mouseenter(function(){
+                            u.stop().animate({marginTop: 0}, 200)
+                        }).mouseleave(function(){
+                            u.stop().animate({marginTop: -getHeight()}, 200)
+                        })
+                    })
+                })
+            })(jQuery);
+        //--></script>
+    </head>
+    <body>
+        <div class="menucontainer">
+            <ul class="menu">
+                <li>
+                    <span>Menu 1</span>
+                    <div class="verticalhider">
+                        <ul>
+                            <li>
+                                <a href="#">Menu 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Menu 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Menu 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Menu 4</a>
+                            </li>
+                            <li>
+                                <a href="#">Menu 5</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <span>Menu 2</span>
+                    <div class="verticalhider">
+                        <ul>
+                            <li>
+                                <a href="#">Menu 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Menu 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Menu 3</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </body>
+</html>

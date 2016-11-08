@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+			<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+			<link rel="stylesheet" href="css/css.css">
+		</head>
+		<script language="JavaScript" type="text/JavaScript">
+		function setColorRadioGroup (radioGroup) { 
+			var radio = radioGroup;   
+			if (radio[0].style) {	
+				for (var r = 0; r < radio.length; r++) 	  
+					if (radio[r].checked) swapColor(radio[r]);	  
+					else swapColor(radio[r]); 
+			}
+		} 
+		function swapColor(oCheckbox) {	 
+			var pop = oCheckbox, checkedcolor = '#549A98';	 
+			while (pop.nodeType != 1 || pop.nodeName.toLowerCase() != 'tr') 				 			
+			pop = pop.parentNode;	 	 
+			pop.style.backgroundColor = (oCheckbox.checked) ? checkedcolor : '#FFFFFF';
+		}
+		</script>
+		<body>
+
+			<div id="containerAll2">
+
+			<div class="container-fluid">
+				<div class="row" id="topoAtividade">
+					<div class="col-md-1">
+						<a href="index.html">	<img id="logoAtividade" src="css/imagens/LOGO.png" onmouseover="this.src='css/imagens/LOGOhover.png'" onmouseout="this.src='css/imagens/LOGO.png'"></a>
+					</div>
+					<div class="col-md-3"></div>
+					<div class="col-md-4">
+						<div id="statusAtividade">
+							<div id="titAtividade">X-OLOGIA, ATIVIDADE Y</div>
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+				</div>
+				
+				<div id="cardQuestao" class="row">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
+						<img src="css/imagens/migalhas.png" id="migalhas">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-md-5">
+									<div id="questaoTitle">
+										QUESTÃO 1
+									</div>
+								</div>
+								<div class="col-md-7"></div>
+							</div>
+						</div>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere nibh non lorem elementum tincidunt. Nullam pulvinar leo at erat tincidunt rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sit amet aliquet enim, ac malesuada lacus.
+						<form>
+							<table id="alternativas">
+								<tr class="alternativa">
+									<td>&nbsp &nbsp A &nbsp </td>									
+									<td><input type="radio" name="alternativa" onclick="setColorRadioGroup(this.form[this.name])"> &nbsp &nbsp </td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+								</tr>
+								<tr class="alternativa">
+									<td>&nbsp &nbsp B &nbsp </td>									
+									<td><input type="radio" name="alternativa" onclick="setColorRadioGroup(this.form[this.name])"> &nbsp &nbsp </td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+								</tr>
+								<tr class="alternativa">
+									<td>&nbsp &nbsp C &nbsp </td>									
+									<td><input type="radio" name="alternativa" onclick="setColorRadioGroup(this.form[this.name])"> &nbsp &nbsp </td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+								</tr>
+								<tr>
+									<td>&nbsp &nbsp D &nbsp </td>									
+									<td><input type="radio" name="alternativa" onclick="setColorRadioGroup(this.form[this.name])"> &nbsp &nbsp </td>
+									<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+								</tr>
+							</table>
+							<div id="cardQuestaoBotoes">
+								<button id="botaoDica">DICA</button>
+								<button id="botaoConfirmar">CONFIRMAR</button>
+							</div>
+						</form>
+					</div>
+					<div class="col-md-2"></div>
+						
+				</div>
+			</div>
+
+			</div>
+			
+		</body>
+	</html>
