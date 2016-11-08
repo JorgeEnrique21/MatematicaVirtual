@@ -192,6 +192,10 @@ a:hover{
 	margin-top:0px;
 	padding:5px 0px 5px 10px;
 }
+#formLogin input{
+	outline: none;
+	color: #000;
+}
 #botaoLogar{
 	border-width: 1px;
 	border-style: solid;
