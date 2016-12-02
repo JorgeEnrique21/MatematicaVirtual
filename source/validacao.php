@@ -8,24 +8,24 @@
 				header("location:index.php"); exit;
 			}
 		// Tenta se conectar ao servidor MySQL
-    		mysql_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
+    		$link = mysqli_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysqli_error());
     	// Tenta se conectar a um banco de dados MySQL
-    		mysql_select_db('matematicavirtual') or trigger_error(mysql_error());		
+    		mysqli_select_db($link, 'matematicavirtual') or trigger_error(mysqli_error($link));		
 		//guarda os nomes de usuario e senha em variáveis
-			$usuario = mysql_real_escape_string($_POST['usuario']);
-			$senha = mysql_real_escape_string($_POST['senha']);
+			$usuario = mysqli_real_escape_string($link, $_POST['usuario']);
+			$senha = mysqli_real_escape_string($link, $_POST['senha']);
 		//validação de usuário e senha digitados
 			$sql = "SELECT `id`, `nome`, `ativo`, `tipo` FROM `usuarios` WHERE (`usuario` = '".$usuario."') AND (`senha` = '".$senha."') AND (`ativo` = '1') LIMIT 1";
-			$consulta = mysql_query($sql);
+			$consulta = mysqli_query($link, $sql);
         //checa os dados enviados
-			if (mysql_num_rows($consulta) != 1) {
+			if (mysqli_num_rows($consulta) != 1) {
         		// Mensagem de erro quando os dados são inválidos e/ou o usuário não foi encontrado
         		echo "Login invalido!"; 
         		exit;
     		} 
     		else {
     		    // Salva os dados encontados na variável $resultado
-    		    $resultado = mysql_fetch_assoc($consulta);
+    		    $resultado = mysqli_fetch_assoc($consulta);
     		 	// Inicia uma sessão se ela não existir
     		 	if(!isset($_SESSION)) session_start();
     		 	//salva dados da sessão
