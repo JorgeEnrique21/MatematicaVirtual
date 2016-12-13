@@ -5,19 +5,19 @@
 </head>
 <?php
 	// Tenta se conectar ao servidor MySQL
-    	$link = mysqli_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
+    	mysql_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
     // Tenta se conectar a um banco de dados MySQL
-    	mysqli_select_db($link, 'matematicavirtual') or trigger_error(mysqli_error($link));	
+    	mysql_select_db('matematicavirtual') or trigger_error(mysql_error());	
     // Seleciona 5 questoes aleatórias no db relacionadas ao assunto
     	$sql = "SELECT id, enunciado FROM questoes WHERE assunto = 'conjuntosNumericos' ORDER BY RAND() LIMIT 5";
-    	$select = mysqli_query($link, $sql);
+    	$select = mysql_query($sql);
     	// Mensagem de erro caso não seja possível selecionar questões
     	if(!$select){
     		echo "Não foi possível obter uma lista de exercícios";
     		die();
     	}
     	$rowsQuestoes = array();
-    	while($row=mysqli_fetch_assoc($select)){
+    	while($row=mysql_fetch_assoc($select)){
     		$rowsQuestoes[] = $row;
     	}
     	echo $rowsQuestoes[0]['enunciado'];
