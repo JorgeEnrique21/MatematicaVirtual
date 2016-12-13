@@ -9,18 +9,18 @@
 			header("location: cadastroform.php"); exit;
 		}
 	//tenta se conectar ao servidos MySQL
-		mysql_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
+		$link = mysqli_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
 	//tenta se conectar ao banco de dados MatematicaVirtual
-		mysql_select_db('matematicavirtual') or trigger_error(mysql_error());
+		mysqli_select_db($link, 'matematicavirtual') or trigger_error(mysqli_error($link));
 	//guarda os nomes de usuario, senha, nome e email em variáveis
-		$usuario = mysql_real_escape_string($_POST['usuario']);
-		$senha = mysql_real_escape_string($_POST['senha']);
-		$nome = mysql_real_escape_string($_POST['nome']);
-		$email = mysql_real_escape_string($_POST['email']);
+		$usuario = mysqli_real_escape_string($link, $_POST['usuario']);
+		$senha = mysqli_real_escape_string($link, $_POST['senha']);
+		$nome = mysqli_real_escape_string($link, $_POST['nome']);
+		$email = mysqli_real_escape_string($link, $_POST['email']);
 	//validação de dados inseridos
 		$query = "SELECT usuario FROM usuarios WHERE ('usuario' = '".$usuario."')";
-		$select = mysql_query($query);
-		$array = mysql_fetch_array($select);
+		$select = mysqli_query($link, $query);
+		$array = mysqli_fetch_array($select, MYSQLI_NUM);
 		$logarray = $array['usuario'];
 
 		//verifica se foi enviado um foto
@@ -64,14 +64,14 @@
 		}
 		//insere os dados de ususario na tabela
 		else{
-			$query = "INSERT INTO usuarios (usuario, senha, nome, email, linkFoto) VALUES ('".$usuario."', '".$senha."', '".$nome."', '".$email."', '".$destino."')";
-			$insert = mysql_query($query);
+			$query = "INSERT INTO usuarios (usuario, senha, nome, email, linkFoto, tipo) VALUES ('".$usuario."', '".$senha."', '".$nome."', '".$email."', '".$destino."', '".$destino."')";
+			$insert = mysqli_query($link, $query);
 		}
 		if ($insert) {
 		// Salva os dados do usuário
 			$sql = "SELECT `id`, `nome`, `ativo` FROM `usuarios` WHERE (`usuario` = '".$usuario."') AND (`senha` = '".$senha."') AND (`ativo` = '1') LIMIT 1";
-			$select = mysql_query($sql);
-    		$resultado = mysql_fetch_assoc($select);
+			$select = mysqli_query($link, $sql);
+    		$resultado = mysqli_fetch_assoc($select);
     	// Inicia uma sessão se ela não existir
     		if(!isset($_SESSION))
 	    		session_start();

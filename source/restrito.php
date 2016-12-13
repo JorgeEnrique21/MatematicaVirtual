@@ -18,12 +18,12 @@
 			<h2>Olá, <?php
 						 echo $_SESSION["usuarioNome"]; 
 						 //tenta se conectar ao servidos MySQL
-						 $link = mysql_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
+						 $link = mysqli_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
 						 //tenta se conectar ao banco de dados MatematicaVirtual
-						 mysql_select_db('matematicavirtual') or trigger_error(mysql_error());
+						 mysqli_select_db($link, 'matematicavirtual') or trigger_error(mysqli_error($link));
 						 $userid = $_SESSION['usuarioId'];
-						 $query = mysql_query("SELECT * FROM usuarios WHERE id = '$userid'") or die(mysql_error());
-						 $resultado = mysql_fetch_array($query);
+						 $query = mysqli_query($link, "SELECT * FROM usuarios WHERE id = '$userid'") or die(mysql_error($link));
+						 $resultado = mysqli_fetch_array($link, $query);
 						 $mostraimagem = $resultado['linkFoto'];			 
 					 ?>!</h2><br>
 					 <img src="<?php echo $mostraimagem; ?>" width="100px" height="125px">

@@ -5,9 +5,9 @@
 </head>
 <?php
 	// Tenta se conectar ao servidor MySQL
-    	mysql_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
+    	$link = mysqli_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysqli_error());
         // Tenta se conectar a um banco de dados MySQL
-    	mysql_select_db('matematicavirtual') or trigger_error(mysql_error());	
+    	mysqli_select_db($link, 'matematicavirtual') or trigger_error(mysqli_error($link));	
     // inicia sessão
         if(!isset($_SESSION)) session_start();
     // contador que determina numero da questão
@@ -37,7 +37,7 @@
             $_POST['contador'] = 0;
             // Seleciona 5 questoes aleatórias no db relacionadas ao assunto
             $sql = "SELECT id, enunciado, linkVideo FROM questoes WHERE assunto = 'conjuntosNumericos' ORDER BY rand() LIMIT 4";
-            $select = mysql_query($sql);
+            $select = mysqli_query($link, $sql);
             // Mensagem de erro caso não seja possível selecionar questões
             if(!$select){
                 echo "Não foi possível obter uma lista de exercícios";
@@ -45,7 +45,7 @@
             }
             // guarda lista de quesões dentro de um array
             $rowsQuestoes = array();
-            while($row=mysql_fetch_assoc($select)){
+            while($row=mysqli_fetch_assoc($select)){
                 $rowsQuestoes[] = $row;
             }
             $_SESSION['rowsQuestoes'] = $rowsQuestoes;
@@ -55,7 +55,7 @@
         $linkVideo = $rowsQuestoes[$_POST['contador']]['linkVideo'];
     //seleciona 4 alternativas de acordo com a questao selecionada
         $sql = "SELECT * FROM alternativas WHERE questaoId = ".$rowsQuestoes[$_POST['contador']]['id']." ORDER BY rand()";
-        $select = mysql_query($sql);
+        $select = mysqli_query($link, $sql);
         // Mensagem de erro caso não seja possível selecionar alternativas
         if(!$select){
             echo "Não foi possível obter alternativas da questão";
@@ -63,7 +63,7 @@
         }
         // guarda alternativas dentro de um array
         $rowsAlternativas = array();
-        while($row=mysql_fetch_assoc($select)){
+        while($row=mysqli_fetch_assoc($select)){
             $rowsAlternativas[] = $row;
         }
 ?>
