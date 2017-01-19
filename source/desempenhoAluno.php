@@ -16,6 +16,10 @@
         		mysql_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
         		// Tenta se conectar a um banco de dados MySQL
         		mysql_select_db('matematicavirtual') or trigger_error(mysql_error());
+        		if (!isset($_SESSION['usuarioId']) || $_SESSION['usuarioTipo'] != 1) {
+        			header("location:index.php");
+        			die();
+        		}
 			?>
 			<div id="containerAll">
 			<div class="container-fluid">
@@ -90,11 +94,10 @@
 							<!-- Cards de desempenho -->
 							<div class="col-md-12" id="containerDesempenho"> 
 										<div id="desempenhoTitle">
-											<h1>Desempenho</h1>	
+											<h1>Desempenho <?php echo "de ".$_POST['unm']."";?></h1>	
 										</div>
 										<?php 
-										if (isset($_SESSION['usuarioId'])) {
-										$sql = "SELECT acertos, erros, materiaNome FROM desempenho WHERE usuarioId = ".$_SESSION['usuarioId']."";
+										$sql = "SELECT acertos, erros, materiaNome FROM desempenho WHERE usuarioId = ".$_POST['uid']."";
 										$select = mysql_query($sql);
 										if (!$select || mysql_num_rows($select) == 0) {
 											echo "<h2>Não há dados de desempenho disponíveis</h2>";
@@ -133,9 +136,6 @@
 										</div>";
 										}
 										}
-									}
-									else
-										echo "<h2>Dados de desempenho não disponíveis,<br> faça login ou cadastre-se para visualiza-los</h2>";
 										?>
 							<!-- Fim das barras de desemepenho -->
 							</div>

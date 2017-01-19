@@ -1,6 +1,11 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<link rel="shortcut icon" href="css/imagens/LOGO.ico" type="image/x-icon" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/css.css">
+        <script src="javascript/jquery-3.1.0.min.js"></script>  
 	</head>
 	<?php
 	//validação de dados de usuário
@@ -41,7 +46,7 @@
     		$_SESSION['usuarioId'] = $resultado['id'];
     		$_SESSION['usuarioNome'] = $resultado['nome'];
     	//redireciona o usuário
-    		header("location: restrito.php"); exit;
+    		header("location: index.php"); exit;
 		}
 		//mensagem de erro caso não seja possível cadastrar
 		else{

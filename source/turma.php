@@ -90,23 +90,50 @@
 						</div>
 						<?php
 							if (isset($_SESSION['usuarioId'])) {
+								if ($_SESSION['usuarioTipo'] == 1) {
+									$sql = "SELECT turmaNome FROM turmas WHERE alunoId = 0";
+									$query = mysql_query($sql);
+									while ($rowTurma = mysql_fetch_assoc($query)) {
+										$sqlAluno = "SELECT * FROM turmas WHERE turmaNome = '".$rowTurma['turmaNome']."'";
+										$queryAluno = mysql_query($sqlAluno);
+										echo "<h2>".$rowTurma['turmaNome']."</h2>\n";						
+										while ($rowAluno = mysql_fetch_assoc($queryAluno)) {
+											echo 
+											"<form action=\"desempenhoAluno.php\" method=\"POST\">
+												<div class=\"row\" id=\"barraConteudo\">".$rowAluno['alunoNome']."";
+												if($rowAluno['alunoId'] > 0){
+												echo 
+												"<input type=\"hidden\" name=\"uid\" value=\"".$rowAluno['alunoId']."\">
+												<input type=\"hidden\" name=\"unm\" value=\"".$rowAluno['alunoNome']."\">
+												<button type=\"submit\" class=\"botaoConteudo\">Ver desempenho</button>";
+											}
+											echo 
+												"</div>
+											</form>\n";
+										}
+									}
+								}
+								else{
 								$sql = "SELECT * FROM turmas WHERE alunoId = ".$_SESSION['usuarioId'].""; 
 								$select = mysql_query($sql);
 								if (mysql_num_rows($select) == 0) {
 									echo "<h2>Você ainda não está inserido em uma turma.</h2>
-									<h3>Para entrar basta inserir o código da turma</h3>
+									<h3>Para entrar basta inserir o nome da turma</h3>
 									<form action=\"entrarTurma.php\" method=\"POST\">
-										Código: <input type=\"text\" name=\"codigoTurma\"></input>
+										Nome da turma: <input type=\"text\" name=\"turmaNome\"></input>
 										<button type=\"submit\">Entrar</button>
 									</form>"; 	
 								} 
 								else{
-									$row = mysql_fetch_assoc($select)
-									$sqlTurma = "SELECT * FROM turmas WHERE nomeTurma = ".$row['nomeTurma']."";							
-									while ($rowAluno = mysql_fetch_assoc($sqlTurma)) {
-										echo $rowAluno['nomeAluno'];
+									$row = mysql_fetch_assoc($select);
+									$sqlTurma = "SELECT * FROM turmas WHERE turmaNome = '".$row['turmaNome']."'";							
+									$queryTurma = mysql_query($sqlTurma);
+									echo "<h2>".$row['turmaNome']."</h2>";						
+									while ($rowAluno = mysql_fetch_assoc($queryTurma)) {
+										echo "<div class=\"row\" id=\"barraConteudo\">".$rowAluno['alunoNome']."</div>";
 									}
 								}
+							}
 							}
 							else
 								echo "<h3>nenhuma turma encontrada</h3><h2>Você precisa estar logado para visualizar ou entrar em sua turma.</h2>";
@@ -114,7 +141,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>		
 	</body>
 	<script type="text/javascript">
 			$(document).ready(

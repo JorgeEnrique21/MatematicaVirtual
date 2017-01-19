@@ -68,7 +68,7 @@
 										<input type=\"text\" id=\"usuarioLogar\" name=\"usuario\">
 										Senha
 										<input type=\"password\" id=\"senhaLogar\" name=\"senha\">
-										<div id=\"formLoginCadastro\"><a href=\"cadastro.html\">Cadastre-se</a></div><button id=\"botaoLogar\" type=\"submit\">Entrar</button>
+										<div id=\"formLoginCadastro\"><a href=\"cadastroForm.php\">Cadastre-se</a></div><button id=\"botaoLogar\" type=\"submit\">Entrar</button>
 									</form>
 								</div>
 							</div>";
