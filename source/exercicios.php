@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+  <meta charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/css.css">
-	<title>Exercícios</title>
+  <title>Exercícios</title>
 </head>
 <?php
-	// Tenta se conectar ao servidor MySQL
-    	mysql_connect('localhost', 'nestor', 'quero.prototipos') or trigger_error(mysql_error());
-        // Tenta se conectar a um banco de dados MySQL
-    	mysql_select_db('matematicavirtual') or trigger_error(mysql_error());	
+  // Tenta se conectar ao servidor MySQL
+      mysql_connect('matvirtual.mysql.dbaas.com.br', 'matvirtual', 'natal1010') or trigger_error(mysql_error());
+    // Tenta se conectar a um banco de dados MySQL
+      mysql_select_db('matvirtual') or trigger_error(mysql_error());
     // inicia sessão
         if(!isset($_SESSION)) session_start();
     // contador que determina numero da questão
+            /*//contador de acertos e erros
+            $contadorAcertos = 0;
+            $contadorErros = 0;*/
         if(isset($_POST['contador'])){
+            if (!isset($_SESSION['contadorAcertos']) && !isset($_SESSION['contadorErros'])) {
+              $_SESSION['contadorAcertos'] = 0;
+              $_SESSION['contadorErros'] = 0;
+            }
             $_POST['contador'] += 1;
             $rowsQuestoes = $_SESSION['rowsQuestoes'];
-            //contador de acertos e erros
-            $contadorAcertos = 0;
-            $contadorErros = 0;
+            $validarQuestaoAnterior = 'nada';
             //validação de alternativas
             if (isset($_POST['alt'])) {
-            	if ($_POST['alt'] == 1) 
-            		$contadorAcertos += 1;
-            	else
-            		$contadorErros += 1;
-            }
+              if ($_POST['alt'] == 1)
+              {
+                $validarQuestaoAnterior = 'acertou'; 
+                $_SESSION['contadorAcertos'] += 1;
+              }
+              else
+              {
+                $validarQuestaoAnterior = 'errou';
+                $_SESSION['contadorErros'] += 1;
+              }
+            }/*
             else
-            	$contadorErros += 1;
+              $contadorErros += 1;
             if (!isset($_SESSION['contadorAcertos']) && !isset($_SESSION['contadorErros'])) {
-            	$_SESSION['contadorAcertos'] = 0;
-            	$_SESSION['contadorErros'] = 0;
+              $_SESSION['contadorAcertos'] = 0;
+              $_SESSION['contadorErros'] = 0;
             }
             $_SESSION['contadorAcertos'] += $contadorAcertos;
-            $_SESSION['contadorErros'] += $contadorErros;
+            $_SESSION['contadorErros'] += $contadorErros;*/
         }
         else{
             $_POST['contador'] = 0;
-            // Seleciona 5 questoes aleatórias no db relacionadas ao assunto
-            $sql = "SELECT id, enunciado, linkVideo FROM questoes WHERE assunto = '".$_POST['nomeAssunto']."' ORDER BY rand() LIMIT 4";
+            // Seleciona 5 questoes aleatórias no db relacionadas ao assunto com nível 1 de dificuldade
+            $sql = "SELECT id, enunciado, linkVideo FROM questoes WHERE assunto = '".$_POST['nomeAssunto']."' AND nivel = 1 ORDER BY rand() LIMIT 3";
             $select = mysql_query($sql);
             // Mensagem de erro caso não seja possível selecionar questões
             if(!$select){
@@ -49,6 +60,30 @@
             }
             // guarda lista de quesões dentro de um array
             $rowsQuestoes = array();
+            while($row=mysql_fetch_assoc($select)){
+                $rowsQuestoes[] = $row;
+            }
+            // Seleciona 3 questoes aleatórias no db relacionadas ao assunto com nível 2 de dificuldade
+            $sql = "SELECT id, enunciado, linkVideo FROM questoes WHERE assunto = '".$_POST['nomeAssunto']."' AND nivel = 2 ORDER BY rand() LIMIT 4";
+            $select = mysql_query($sql);
+            // Mensagem de erro caso não seja possível selecionar questões
+            if(!$select){
+                echo "Não foi possível obter uma lista de exercícios";
+                die();
+            }
+            // guarda lista de quesões dentro de um array
+            while($row=mysql_fetch_assoc($select)){
+                $rowsQuestoes[] = $row;
+            }
+            // Seleciona 2 questoes aleatórias no db relacionadas ao assunto com nível 3 de dificuldade
+            $sql = "SELECT id, enunciado, linkVideo FROM questoes WHERE assunto = '".$_POST['nomeAssunto']."' AND nivel = 3 ORDER BY rand() LIMIT 3";
+            $select = mysql_query($sql);
+            // Mensagem de erro caso não seja possível selecionar questões
+            if(!$select){
+                echo "Não foi possível obter uma lista de exercícios";
+                die();
+            }
+            // guarda lista de quesões dentro de um array
             while($row=mysql_fetch_assoc($select)){
                 $rowsQuestoes[] = $row;
             }
@@ -87,14 +122,14 @@
         </div>
         <div id="cardQuestao" class="row">
             <form action="<?php 
-            if ($_POST['contador'] == 3) {
+            if ($_POST['contador'] == 9) {
                 echo "resultado.php";
             } 
             else echo "exercicios.php";    
             ?>" method="post">
                 <h1 id="questaoTitle">Questão <?php echo $_POST['contador']+1; ?></h1>
                 <?php if (isset($linkVideo)) {
-                	echo "<iframe width=\"100%\" height=\"315\" src=\"$linkVideo\" frameborder=\"0\" ></iframe>";} 
+                  echo "<iframe width=\"100%\" height=\"315\" src=\"$linkVideo\" frameborder=\"0\" ></iframe>";} 
                 ?>
                 <p><?php echo $enunciado; ?></p>
                 <table id="alternativas">
@@ -107,6 +142,7 @@
                             <input type="radio" name="alt" id="A" value="<?php echo $rowsAlternativas[0]['tipo'] ?>">    
                         </td>
                         <td>
+                            <?php echo $rowsAlternativas[0]['tipo']; ?><br>
                             <?php echo $rowsAlternativas[0]['alternativa']; ?><br>
                         </td>
                     </tr>
@@ -116,9 +152,10 @@
                             &nbsp &nbsp B ) &nbsp 
                         </td>
                         <td class="alternativaInput">
-                            <input type="radio" name="alt" id="B" value="<?php echo $rowsAlternativas[1]['tipo'] ?>">    
+                            <input type="radio" name="alt" id="B" value="<?php echo $rowsAlternativas[1]['tipo'] ?>"> 
                         </td>
                         <td>
+                            <?php echo $rowsAlternativas[1]['tipo']; ?>   
                             <?php echo $rowsAlternativas[1]['alternativa']; ?><br>
                         </td>
                     </tr>
@@ -128,9 +165,10 @@
                             &nbsp &nbsp C ) &nbsp 
                         </td>
                         <td class="alternativaInput">
-                            <input type="radio" name="alt" id="C" value="<?php echo $rowsAlternativas[2]['tipo'] ?>">    
+                            <input type="radio" name="alt" id="C" value="<?php echo $rowsAlternativas[2]['tipo'] ?>">  
                         </td>
                         <td>
+                            <?php echo $rowsAlternativas[2]['tipo']; ?>  
                             <?php echo $rowsAlternativas[2]['alternativa']; ?><br>
                         </td>
                     </tr>
@@ -140,22 +178,22 @@
                             &nbsp &nbsp D ) &nbsp 
                         </td>
                         <td class="alternativaInput">
-                            <input type="radio" name="alt" id="D" value="<?php echo $rowsAlternativas[3]['tipo'] ?>">    
+                            <input type="radio" name="alt" id="D" value="<?php echo $rowsAlternativas[3]['tipo'] ?>"> 
                         </td>
                         <td>
+                            <?php echo $rowsAlternativas[3]['tipo']; ?>   
                             <?php echo $rowsAlternativas[3]['alternativa']; ?><br>
                         </td>
                     </tr>
                 </table>
                 <input type="hidden" name="nomeAssunto" value="<?php echo $_POST['nomeAssunto'] ?>">
                 <div id="cardQuestaoBotoes">
-                    <input type="submit" id="botaoConfirmar" value="<?php
-                    if ($_POST['contador'] == 3) {
-                    echo "Pronto!";
-                    } 
-                    else echo "Próxima";
-                    ?>">
+                    <input type="submit" id="botaoConfirmar" value="<?php $_POST['contador'] == 9 ? print_r("Pronto!") : print_r("Próxima") ?>">
                 </div>
+                <?php echo "Contador: ",$_POST['contador']; ?>
+                <?php echo "Contador acertos: ". $contadorAcertos; ?>
+                <?php echo "Contador erros: ". $contadorErros; ?>
+                <?php echo "Questão anterior: ". $validarQuestaoAnterior; ?>
             </form>
         </div>
     </div>
